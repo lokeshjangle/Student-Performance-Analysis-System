@@ -66,8 +66,9 @@ public class AdminController : ControllerBase
         }
         else
         {
-            admin.Email = input.Email;
-            admin.Password = input.Password;
+            admin.UserName = input.UserName ?? (site.Admins.FirstOrDefault(e => e.UserName == name)?.UserName);
+            admin.Email = input.Email != null ? input.Email : site.Admins.FirstOrDefault(e => e.UserName == name)?.Email;
+            admin.Password = input.Password != null ? input.Password : site.Admins.FirstOrDefault(e=>e.UserName == name)?.Password;
             await site.SaveChangesAsync();
             return Ok(); 
         }
