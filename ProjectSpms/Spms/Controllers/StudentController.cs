@@ -9,27 +9,21 @@ public class StudentController : ControllerBase{
     private readonly SiteDbContext site;
     public StudentController(SiteDbContext site){
         this.site = site;
-        ++Student.Count;
     }
 
-    [HttpGet]
-    public ActionResult<List<object>> GetStudent(){
-    var students = from std in site.Students
-                   select new 
-                   {
-                        std.StudentId,
-                        std.FirstName,
-                        std.MiddleName,
-                        std.LastName,
-                        std.Email,
-                        std.Mobile,
-                        std.DOB.Date,
-                   };
 
-    var studentList = students.ToList();
+    //Get Student By ID
+   [HttpGet("{id}")]
+    public ActionResult<List<Student>> GetStudentById(int id)
+    {
+        var student = site.Students.FirstOrDefault(std => std.StudentId == id);
 
-    return studentList.Any() ? studentList.Cast<object>().ToList() : NotFound("Data Not Found"); 
-}
+        if (student == null)
+        {
+            return NotFound($"{id} Not Found");
+        }
+        return Ok(student);
+    }
 
 
     [HttpPost]

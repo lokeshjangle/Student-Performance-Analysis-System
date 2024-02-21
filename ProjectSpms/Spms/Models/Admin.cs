@@ -12,4 +12,6 @@ public class Admin{
     public string Password{get; set;}
 
     public string Email{get; set;}
+
+    public Course course = new() { };
 }

@@ -4,7 +4,7 @@ using spms.Models;
 namespace spms.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("/api/admin")]
 public class AdminController : ControllerBase
 {
 
@@ -73,7 +73,25 @@ public class AdminController : ControllerBase
             return Ok(); 
         }
     }
-
     
+    [HttpGet("studentList")]
+    public ActionResult<List<object>> GetStudent(){
+    var students = from std in site.Students
+                   select new 
+                   {
+                        std.StudentId,
+                        std.FirstName,
+                        std.MiddleName,
+                        std.LastName,
+                        std.Email,
+                        std.Mobile,
+                        std.DOB.Date,
+                   };
+
+    var studentList = students.ToList();
+
+    return studentList.Any() ? studentList.Cast<object>().ToList() : NotFound("Data Not Found"); 
+}
+
     
 }
