@@ -16,8 +16,8 @@ public class AdminController : ControllerBase
     [HttpGet] 
     public ActionResult<List<Admin>> Index()
     {
-        var selection = from e in site.Admins
-                        select e;
+        List<Admin> selection = (from e in site.Admins
+                        select e).ToList();
         return selection.Count() > 0 ? selection.ToList() : NotFound();
     }
 
@@ -56,7 +56,7 @@ public class AdminController : ControllerBase
     }
 
     [HttpPut("{name}")]
-    public async Task<IActionResult> UpdateAdmin(string name, Admin input)
+    public async Task<IActionResult> UpdateAdmin(string name,[FromBody] Admin input)
     {
     var admin = await site.Admins.FindAsync(name);
 
@@ -77,16 +77,7 @@ public class AdminController : ControllerBase
     [HttpGet("studentList")]
     public ActionResult<List<object>> GetStudent(){
     var students = from std in site.Students
-                   select new 
-                   {
-                        std.StudentId,
-                        std.FirstName,
-                        std.MiddleName,
-                        std.LastName,
-                        std.Email,
-                        std.Mobile,
-                        std.DOB.Date,
-                   };
+                   select std;
 
     var studentList = students.ToList();
 

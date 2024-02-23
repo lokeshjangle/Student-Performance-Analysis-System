@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace spms.Models;
 
@@ -13,5 +14,4 @@ public class Admin{
 
     public string Email{get; set;}
 
-    public Course course = new() { };
 }

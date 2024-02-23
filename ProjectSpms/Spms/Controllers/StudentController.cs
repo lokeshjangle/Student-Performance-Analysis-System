@@ -11,10 +11,19 @@ public class StudentController : ControllerBase{
         this.site = site;
     }
 
+   [HttpGet]
+    public ActionResult<List<Student>> GetStudent(){
+    var students = from std in site.Students
+                   select std; 
+                
 
+    var studentList = students.ToList();
+
+    return studentList.Any() ? studentList.ToList() : NotFound("Data Not Found"); 
+}
     //Get Student By ID
    [HttpGet("{id}")]
-    public ActionResult<List<Student>> GetStudentById(int id)
+    public ActionResult<List<Student>> GetStudentById( int id)
     {
         var student = site.Students.FirstOrDefault(std => std.StudentId == id);
 
@@ -36,7 +45,7 @@ public class StudentController : ControllerBase{
         else{
             std.StudentId = lastStudent != null ? lastStudent.StudentId + 1 : 1001 ;
             std.Password = std.StudentId.ToString();
-            std.DOB = std.DOB.Date;
+            std.DOB = std.DOB;
             site.Students.Add(std);
             site.SaveChanges();
             return Ok("Student Added Successfully");
@@ -44,7 +53,7 @@ public class StudentController : ControllerBase{
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateStudent(int id, Student input)
+    public async Task<IActionResult> UpdateStudent(int id,[FromBody] Student input)
     {
         var std = await site.Students.FindAsync(id);
 
@@ -59,9 +68,14 @@ public class StudentController : ControllerBase{
             std.LastName = input.LastName != null ? input.LastName :site.Students.FirstOrDefault(e => e.StudentId == id)?.LastName;
             std.Email = input.Email != null ? input.Email : site.Students.FirstOrDefault(e => e.StudentId == id)?.Email;
             std.Mobile = input.Mobile != null ? input.Mobile : site.Students.FirstOrDefault(e => e.StudentId == id)?.Mobile;
-            #pragma warning disable CS8073 // The result of the expression is always the same since a value of this type is never equal to 'null'
-            std.DOB = (DateTime)(input.DOB != null ? input.DOB : site.Students.FirstOrDefault(e => e.StudentId == id)?.DOB);
-            #pragma warning restore CS8073 // The result of the expression is always the same since a value of this type is never equal to 'null'
+            std.DOB = input.DOB != null ? input.DOB : site.Students.FirstOrDefault(e => e.StudentId == id)?.DOB;
+            std.Sex = input.Sex != null ? input.Sex : site.Students.FirstOrDefault(e=>e.StudentId==id)?.Sex;
+            #pragma warning disable CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
+            std.CourseId = (int)(input.CourseId != null ? input.CourseId : site.Students.FirstOrDefault(e => e.StudentId == id)?.CourseId);
+            #pragma warning restore CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
+            #pragma warning disable CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
+            std.Batch = (int)(input.Batch != null ? input.Batch : site.Students.FirstOrDefault(e=>e.StudentId==id)?.Batch);
+            #pragma warning restore CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
             await site.SaveChangesAsync();
             return Ok($"{std.FirstName} Update Successfully"); 
         }

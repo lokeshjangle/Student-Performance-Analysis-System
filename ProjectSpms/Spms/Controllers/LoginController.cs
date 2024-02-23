@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using spms.Models;
@@ -11,6 +12,7 @@ namespace spms.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
+    [Authorize]
     public class LoginController : ControllerBase
     {
         private readonly SiteDbContext _site;

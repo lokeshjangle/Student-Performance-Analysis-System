@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 namespace spms.Models
 {
     [Table("Student")]
@@ -12,8 +13,14 @@ namespace spms.Models
         public string Email { get; set; }
 
         //[Column(TypeName = "Date")] // Specify the database column type
-        public DateTime DOB { get; set; }
+        public string DOB { get; set; }
 
-        public string Password { get; set; }
+        public string Sex{get; set;}
+        public int CourseId{get; set;}
+
+        public int Batch{get; set;}
+
+        [JsonIgnore]
+        public string Password { get; set; } 
     }
 }
