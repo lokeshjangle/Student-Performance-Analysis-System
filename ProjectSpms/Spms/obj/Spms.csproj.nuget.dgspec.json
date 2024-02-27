@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/lokesh/cdac/ProjectSpms/Spms/Spms.csproj": {}
+    "C:\\Users\\LENOVO\\OneDrive\\Desktop\\ProjectSpms\\Spms\\Spms.csproj": {}
   },
   "projects": {
-    "/home/lokesh/cdac/ProjectSpms/Spms/Spms.csproj": {
+    "C:\\Users\\LENOVO\\OneDrive\\Desktop\\ProjectSpms\\Spms\\Spms.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/lokesh/cdac/ProjectSpms/Spms/Spms.csproj",
+        "projectUniqueName": "C:\\Users\\LENOVO\\OneDrive\\Desktop\\ProjectSpms\\Spms\\Spms.csproj",
         "projectName": "Spms",
-        "projectPath": "/home/lokesh/cdac/ProjectSpms/Spms/Spms.csproj",
-        "packagesPath": "/home/lokesh/.nuget/packages/",
-        "outputPath": "/home/lokesh/cdac/ProjectSpms/Spms/obj/",
+        "projectPath": "C:\\Users\\LENOVO\\OneDrive\\Desktop\\ProjectSpms\\Spms\\Spms.csproj",
+        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LENOVO\\OneDrive\\Desktop\\ProjectSpms\\Spms\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/lokesh/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -62,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

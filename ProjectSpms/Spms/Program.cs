@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 // builder.Services.AddDbContext<spms.Models.SiteDbContext>();
 builder.Services.AddDbContext<SiteDbContext>(options =>
-    options.UseMySQL("Data Source=192.168.171.49;Database=spms;User Id=root;Password=120801"));
+    options.UseMySQL("Data Source=localhost;Database=spms;User Id=root;Password=120801"));
 
 builder.Services.AddAuthentication()
                 .AddCookie(option => option.LoginPath = "");

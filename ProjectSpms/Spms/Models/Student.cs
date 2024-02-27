@@ -12,15 +12,14 @@ namespace spms.Models
         public string Mobile { get; set; }
         public string Email { get; set; }
 
-        //[Column(TypeName = "Date")] // Specify the database column type
         public string DOB { get; set; }
 
         public string Sex{get; set;}
-        public int CourseId{get; set;}
 
         public int Batch{get; set;}
 
-        [JsonIgnore]
+        //[JsonIgnore]
         public string Password { get; set; } 
+        public string CourseName{get; set;}
     }
 }

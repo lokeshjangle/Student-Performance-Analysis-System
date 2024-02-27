@@ -58,4 +58,45 @@ public class CourseController : ControllerBase{
         await site.SaveChangesAsync();
         return Ok($"{course.CourseName} Delete Successfully");
     }
+
+ [HttpPost("{courseId}")]
+public IActionResult AddSubjectsToCourse(int courseId, [FromBody] List<Subject> subjects)
+{
+    try
+    {
+        var course = site.Courses.FirstOrDefault(crs => crs.CourseId == courseId);
+
+        if (course == null)
+        {
+            return NotFound("Course not found");
+        }
+
+        foreach (var subject in subjects)
+        {
+            var existingSubject = site.Subjects.FirstOrDefault(s => s.SubjectId == subject.SubjectId);
+
+            if (existingSubject == null)
+            {
+                subject.CourseName = course.CourseName; // Assign course name to subject
+                course.Subjects.Add(subject); // Add subject to the course
+            }
+            else
+            {
+                // If subject already exists in the database, return Conflict
+                return Conflict("Subject with ID " + subject.SubjectId + " is already present");
+            }
+        }
+
+        site.SaveChanges();
+
+        return Ok("Subjects added to the course successfully");
+    }
+    catch (Exception e)
+    {
+        // Log the exception for further investigation
+        Console.WriteLine(e.Message);
+        return StatusCode(500, "Internal Server Error");
+    }
+}
+
 }

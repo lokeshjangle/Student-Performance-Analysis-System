@@ -15,7 +15,6 @@ public class StudentController : ControllerBase{
     public ActionResult<List<Student>> GetStudent(){
     var students = from std in site.Students
                    select std; 
-                
 
     var studentList = students.ToList();
 
@@ -70,9 +69,7 @@ public class StudentController : ControllerBase{
             std.Mobile = input.Mobile != null ? input.Mobile : site.Students.FirstOrDefault(e => e.StudentId == id)?.Mobile;
             std.DOB = input.DOB != null ? input.DOB : site.Students.FirstOrDefault(e => e.StudentId == id)?.DOB;
             std.Sex = input.Sex != null ? input.Sex : site.Students.FirstOrDefault(e=>e.StudentId==id)?.Sex;
-            #pragma warning disable CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
-            std.CourseId = (int)(input.CourseId != null ? input.CourseId : site.Students.FirstOrDefault(e => e.StudentId == id)?.CourseId);
-            #pragma warning restore CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
+            std.CourseName = (input.CourseName != null ? input.CourseName : site.Students.FirstOrDefault(e => e.StudentId == id)?.CourseName);
             #pragma warning disable CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
             std.Batch = (int)(input.Batch != null ? input.Batch : site.Students.FirstOrDefault(e=>e.StudentId==id)?.Batch);
             #pragma warning restore CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'

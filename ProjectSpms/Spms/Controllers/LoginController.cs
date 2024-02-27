@@ -12,7 +12,7 @@ namespace spms.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class LoginController : ControllerBase
     {
         private readonly SiteDbContext _site;
@@ -44,10 +44,10 @@ namespace spms.Controllers
         }
 
         [HttpPost("studentLogin")]
-        public async Task<IActionResult> StudentLogin(Student input)
+        public async Task<IActionResult> StudentLogin([FromBody] Student input)
         {
             var student = await _site.Students.FirstOrDefaultAsync(a => a.StudentId == input.StudentId);
-
+            Console.WriteLine(student.StudentId);
             if (student != null && student.Password == input.Password)
             {
                 var identity = new ClaimsIdentity("Student");

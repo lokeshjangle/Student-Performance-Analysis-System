@@ -4,7 +4,7 @@ using spms.Models;
 namespace spms.Controllers;
 
 [ApiController]
-[Route("/api/admin")]
+[Route("/api/[controller]")]
 public class AdminController : ControllerBase
 {
 
@@ -14,7 +14,7 @@ public class AdminController : ControllerBase
         this.site = site;
     }
     [HttpGet] 
-    public ActionResult<List<Admin>> Index()
+    public ActionResult<List<Admin>> GetAdmin()
     {
         List<Admin> selection = (from e in site.Admins
                         select e).ToList();
@@ -67,6 +67,7 @@ public class AdminController : ControllerBase
         else
         {
             admin.UserName = input.UserName ?? (site.Admins.FirstOrDefault(e => e.UserName == name)?.UserName);
+            admin.Name = input.Name ?? (site.Admins.FirstOrDefault(e => e.Name == name)?.Name);
             admin.Email = input.Email != null ? input.Email : site.Admins.FirstOrDefault(e => e.UserName == name)?.Email;
             admin.Password = input.Password != null ? input.Password : site.Admins.FirstOrDefault(e=>e.UserName == name)?.Password;
             await site.SaveChangesAsync();
