@@ -31,7 +31,17 @@ CREATE TABLE `course` (
   `CourseName` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`CourseId`)
 ) 
-
+CREATE TABLE `subject` (
+  `SrNo` int NOT NULL AUTO_INCREMENT,
+  `SubjectId` int NOT NULL,
+  `SubjectName` varchar(255) NOT NULL,
+  `CourseId` int DEFAULT NULL,
+  `CourseName` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`SrNo`),
+  UNIQUE KEY `SubjectId` (`SubjectId`),
+  KEY `CourseId` (`CourseId`),
+  CONSTRAINT `subject_ibfk_1` FOREIGN KEY (`CourseId`) REFERENCES `course` (`CourseId`)
+)
 
 INSERT INTO Student 
 VALUES 
