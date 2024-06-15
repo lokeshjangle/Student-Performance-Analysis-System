@@ -1,0 +1,81 @@
+CREATE TABLE `admin` (
+  `Password` varchar(255) DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`user_name`)
+)
+
+CREATE TABLE `course` (
+  `CourseId` int NOT NULL,
+  `CourseName` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`CourseId`)
+) 
+
+CREATE TABLE `question` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `category` varchar(255) DEFAULT NULL,
+  `difficultylevel` varchar(255) DEFAULT NULL,
+  `option1` varchar(255) DEFAULT NULL,
+  `option2` varchar(255) DEFAULT NULL,
+  `option3` varchar(255) DEFAULT NULL,
+  `option4` varchar(255) DEFAULT NULL,
+  `question_title` varchar(255) DEFAULT NULL,
+  `right_answer` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) 
+
+CREATE TABLE `quiz` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+
+CREATE TABLE `quiz_questions` (
+  `quiz_id` int NOT NULL,
+  `questions_id` int NOT NULL,
+  KEY `FKpmfvwer12y1nrjc0efm04dq16` (`questions_id`),
+  KEY `FKcgp9e1c6ww3t383aui4w8feae` (`quiz_id`),
+  CONSTRAINT `FKcgp9e1c6ww3t383aui4w8feae` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`id`),
+  CONSTRAINT `FKpmfvwer12y1nrjc0efm04dq16` FOREIGN KEY (`questions_id`) REFERENCES `question` (`id`)
+)
+
+CREATE TABLE `student` (
+  `StudentId` int NOT NULL,
+  `FirstName` varchar(255) NOT NULL,
+  `MiddleName` varchar(255) NOT NULL,
+  `LastName` varchar(255) NOT NULL,
+  `Mobile` varchar(10) NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `Sex` varchar(255) NOT NULL,
+  `DOB` varchar(255) NOT NULL,
+  `Batch` int NOT NULL,
+  `Password` varchar(255) DEFAULT NULL,
+  `CourseName` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`StudentId`)
+) 
+
+CREATE TABLE `student_result` (
+  `markid` int NOT NULL,
+  `marks` int NOT NULL,
+  `student_id` int NOT NULL,
+  `quiz_id` int NOT NULL,
+  PRIMARY KEY (`markid`),
+  UNIQUE KEY `UK3fnyg0kr2vcs7vk2ktkvx4bhq` (`student_id`,`quiz_id`)
+)
+
+CREATE TABLE `student_result_seq` (
+  `next_val` bigint DEFAULT NULL
+) 
+
+CREATE TABLE `subject` (
+  `SrNo` int NOT NULL AUTO_INCREMENT,
+  `SubjectId` int NOT NULL,
+  `SubjectName` varchar(255) NOT NULL,
+  `CourseId` int DEFAULT NULL,
+  `CourseName` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`SrNo`),
+  UNIQUE KEY `SubjectId` (`SubjectId`),
+  KEY `CourseId` (`CourseId`),
+  CONSTRAINT `subject_ibfk_1` FOREIGN KEY (`CourseId`) REFERENCES `course` (`CourseId`)
+)
